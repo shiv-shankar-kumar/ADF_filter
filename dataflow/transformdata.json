@@ -12,7 +12,15 @@
 					"name": "sourveCSV"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText6",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
 			"transformations": [
 				{
 					"name": "select1"
@@ -85,7 +93,14 @@
 				"     disjoint: false) ~> split1@(corp, retail)",
 				"sourveCSV derive(payment_mode = coalesce(payment_mode, 'N/A')) ~> derivedColumn1",
 				"split1@corp aggregate(groupBy(email),",
-				"     Total_Revenue = sum(Total_Revenue)) ~> aggregate1"
+				"     Total_Revenue = sum(Total_Revenue)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
 			]
 		}
 	}

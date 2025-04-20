@@ -3,8 +3,8 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "Transformation",
-				"type": "ExecuteDataFlow",
+				"name": "Get Metadata1",
+				"type": "GetMetadata",
 				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
@@ -15,18 +15,52 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataflow": {
-						"referenceName": "transformdata",
-						"type": "DataFlowReference"
+					"dataset": {
+						"referenceName": "DelimitedText6",
+						"type": "DatasetReference"
 					},
-					"compute": {
-						"coreCount": 8,
-						"computeType": "General"
+					"fieldList": [
+						"childItems"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
 					},
-					"traceLevel": "Fine"
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			},
+			{
+				"name": "Set variable1",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Get Metadata1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "gettingFiles",
+					"value": {
+						"value": "@activity('Get Metadata1').output.childItems",
+						"type": "Expression"
+					}
 				}
 			}
 		],
+		"variables": {
+			"gettingFiles": {
+				"type": "Array"
+			}
+		},
 		"annotations": []
 	}
 }

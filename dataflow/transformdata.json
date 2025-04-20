@@ -1,0 +1,92 @@
+{
+	"name": "transformdata",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText5",
+						"type": "DatasetReference"
+					},
+					"name": "sourveCSV"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "select1"
+				},
+				{
+					"name": "filter1"
+				},
+				{
+					"name": "split1"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          invoice_no as string,",
+				"          oyo_id as string,",
+				"          channel as string,",
+				"          Total_Revenue as integer,",
+				"          room_revenue as string,",
+				"          meal_revenue as string,",
+				"          PrePaid as integer,",
+				"          PostPaid as integer,",
+				"          checkin as string,",
+				"          Consumed_Status as string,",
+				"          email as string,",
+				"          account_id as string,",
+				"          Sales_Agent_Share as string,",
+				"          amount as string,",
+				"          payment_mode as string,",
+				"          Final_Revenue as string,",
+				"          Prop_16 as string,",
+				"          Prop_17 as string,",
+				"          Prop_18 as string,",
+				"          Prop_19 as string,",
+				"          Prop_20 as string,",
+				"          Prop_21 as string,",
+				"          Prop_22 as string,",
+				"          Prop_23 as string,",
+				"          Prop_24 as string",
+				"     ),",
+				"     allowSchemaDrift: false,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourveCSV",
+				"derivedColumn1 select(mapColumn(",
+				"          invoice_no,",
+				"          oyo_id,",
+				"          channel,",
+				"          Total_Revenue,",
+				"          room_revenue,",
+				"          meal_revenue,",
+				"          PrePaid,",
+				"          PostPaid,",
+				"          checkin,",
+				"          Consumed_Status,",
+				"          email,",
+				"          account_id,",
+				"          amount,",
+				"          payment_mode,",
+				"          Final_Revenue",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 filter(Total_Revenue > 2000) ~> filter1",
+				"filter1 split(channel == 'Corp',",
+				"     disjoint: false) ~> split1@(corp, retail)",
+				"sourveCSV derive(payment_mode = coalesce(payment_mode, 'N/A')) ~> derivedColumn1",
+				"split1@corp aggregate(groupBy(email),",
+				"     Total_Revenue = sum(Total_Revenue)) ~> aggregate1"
+			]
+		}
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"name": "Xml1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservie_forexcel_file",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Xml",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "winning_weak.xlsx",
+				"folderPath": "csvfiles",
+				"fileSystem": "source"
+			}
+		}
+	}
+}

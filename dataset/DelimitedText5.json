@@ -1,0 +1,125 @@
+{
+	"name": "DelimitedText5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linkedservie_forexcel_file",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "winning_weak.csv",
+				"folderPath": "csvfiles",
+				"fileSystem": "source"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "invoice_no",
+				"type": "String"
+			},
+			{
+				"name": "oyo_id",
+				"type": "String"
+			},
+			{
+				"name": "channel",
+				"type": "String"
+			},
+			{
+				"name": "Total_Revenue",
+				"type": "String"
+			},
+			{
+				"name": "room_revenue",
+				"type": "String"
+			},
+			{
+				"name": "meal_revenue",
+				"type": "String"
+			},
+			{
+				"name": "PrePaid",
+				"type": "String"
+			},
+			{
+				"name": "PostPaid",
+				"type": "String"
+			},
+			{
+				"name": "checkin",
+				"type": "String"
+			},
+			{
+				"name": "Consumed_Status",
+				"type": "String"
+			},
+			{
+				"name": "email",
+				"type": "String"
+			},
+			{
+				"name": "account_id",
+				"type": "String"
+			},
+			{
+				"name": "Sales_Agent_Share",
+				"type": "String"
+			},
+			{
+				"name": "amount",
+				"type": "String"
+			},
+			{
+				"name": "payment_mode",
+				"type": "String"
+			},
+			{
+				"name": "Final_Revenue",
+				"type": "String"
+			},
+			{
+				"name": "Prop_16",
+				"type": "String"
+			},
+			{
+				"name": "Prop_17",
+				"type": "String"
+			},
+			{
+				"name": "Prop_18",
+				"type": "String"
+			},
+			{
+				"name": "Prop_19",
+				"type": "String"
+			},
+			{
+				"name": "Prop_20",
+				"type": "String"
+			},
+			{
+				"name": "Prop_21",
+				"type": "String"
+			},
+			{
+				"name": "Prop_22",
+				"type": "String"
+			},
+			{
+				"name": "Prop_23",
+				"type": "String"
+			},
+			{
+				"name": "Prop_24",
+				"type": "String"
+			}
+		]
+	}
+}
